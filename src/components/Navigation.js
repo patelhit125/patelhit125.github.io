@@ -2,18 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-const Navbar = (props) => {
-
+const Navigation = () => {
   const cookies = new Cookies();
   let storedDarkMode = false;
   if (cookies.get('DARK_MODE') === 'true') {
     storedDarkMode = true;
   }
   const [isDarkMode, setDarkMode] = React.useState(storedDarkMode);
-  const { aboutRef, workRef, contactRef } = props;
-  const scrollAbout = () => aboutRef.current.scrollIntoView();
-  const scrollWork = () => workRef.current.scrollIntoView();
-  const scrollContact = () => contactRef.current.scrollIntoView();
 
   const darkMode = () => {
     setDarkMode(!isDarkMode);
@@ -25,13 +20,13 @@ const Navbar = (props) => {
     <nav className="container">
       <Link className="navBrand" to='/'>Hit.</Link>
       <div className="navMenu">
-        <Link className="navLink" to='/' onClick={scrollAbout}>About</Link>
-        <Link className="navLink" to='/' onClick={scrollWork}>Work</Link>
-        <Link className="navLink" to='/' onClick={scrollContact}>Contact</Link>
+        <Link className="navLink" to='/about'>About</Link>
+        <Link className="navLink" to='/work'>Work</Link>
+        <Link className="navLink" to='/contact'>Contact</Link>
         <button onClick={darkMode} tabIndex={0} className="darkMode"></button>
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default Navigation;

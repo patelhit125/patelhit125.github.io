@@ -1,17 +1,12 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import Fade from 'react-reveal/Fade';
 import { useParams, Link } from 'react-router-dom';
-import { retry } from '../../utils/commonFunctions';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { projectData } from '../ProjectData';
-const Navigation = lazy(() => retry(() => import('../../components/Navigation')));
-const Footer = lazy(() => retry(() => import('../../components/Footer')));
 
-const Work = (props) => {
+const Work = () => {
 
   const workCode = useParams().workCode;
-
-  const { aboutRef, workRef, contactRef } = props;
 
   let project;
   switch (workCode) {
@@ -41,7 +36,6 @@ const Work = (props) => {
 
   return (
     <>
-      <Navigation aboutRef={aboutRef} workRef={workRef} contactRef={contactRef} />
       <div className="bebasHuge">
         Work
       </div>
@@ -88,7 +82,6 @@ const Work = (props) => {
           </div>
         </Fade>
       </div>
-      <Footer aboutRef={aboutRef} workRef={workRef} contactRef={contactRef} />
     </>
   );
 }

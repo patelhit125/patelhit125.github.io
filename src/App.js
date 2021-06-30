@@ -5,9 +5,13 @@ import { retry } from './utils/commonFunctions';
 import Cookies from 'universal-cookie';
 import ScrollToTop from './components/ScrollToTop';
 import Loader from './components/Loader';
+const Navigation = lazy(() => retry(() => import('./components/Navigation')));
 const Home = lazy(() => retry(() => import('./components/Home')));
-const Work = lazy(() => retry(() => import('./components/Work')));
 const Project = lazy(() => retry(() => import('./components/Work/index')));
+const About = lazy(() => retry(() => import('./components/About')));
+const Work = lazy(() => retry(() => import('./components/Work')));
+const Contact = lazy(() => retry(() => import('./components/Contact')));
+const Footer = lazy(() => retry(() => import('./components/Footer')));
 
 const App = () => {
 
@@ -25,9 +29,19 @@ const App = () => {
       displayName: 'Home'
     },
     {
+      pageLink: '/about',
+      view: About,
+      displayName: 'About'
+    },
+    {
       pageLink: '/work',
       view: Work,
       displayName: 'Work'
+    },
+    {
+      pageLink: '/contact',
+      view: Contact,
+      displayName: 'Contact'
     },
     {
       pageLink: '/work/:workCode',
@@ -40,6 +54,7 @@ const App = () => {
     <Router>
       <ScrollToTop />
       <Suspense fallback={<Loader />}>
+        <Navigation />
         <Switch>
           {pages.map((page, index) => {
             return (
@@ -53,6 +68,7 @@ const App = () => {
           })}
           <Redirect to='/' />
         </Switch>
+        <Footer />
       </Suspense>
     </Router>
   );
